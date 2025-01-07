@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Splash_Screen">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:id="@+id/IV_sp_logo"
+        android:src="@drawable/mainlogo"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/Title"
+        android:textColor="@color/Green"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:layout_marginTop="16sp"
+        android:id="@+id/TVname"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:text="Let's Discover the world"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="italic|bold|normal"
+        android:id="@+id/TVauthor"
+        android:layout_marginTop="100dp"
+        />
+
+
+</LinearLayout>
