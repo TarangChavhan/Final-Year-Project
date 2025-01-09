@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/verifyotpPhoneNumber"
         android:textColor="@color/Brown"
-        android:text="+91 9890339216"
+        android:text="Mobile Number"
         android:textSize="24dp"
         android:textStyle="bold"
         android:gravity="center"

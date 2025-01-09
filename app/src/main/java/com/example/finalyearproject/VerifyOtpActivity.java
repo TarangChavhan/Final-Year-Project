@@ -73,6 +73,9 @@ public class VerifyOtpActivity extends AppCompatActivity {
         strEmailId = getIntent().getStringExtra("emailid");
         strPassWord = getIntent().getStringExtra("password");
         strUsername = getIntent().getStringExtra("username");
+
+        TVnumber.setText(strMobileNo);
+
         Toast.makeText(this, strName, Toast.LENGTH_SHORT).show();
 
 
