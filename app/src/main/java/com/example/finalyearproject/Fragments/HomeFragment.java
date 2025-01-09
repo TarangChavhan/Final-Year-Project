@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
     TextView tvNoCategoryAvilable;
     List<POJOGetAllCategoryDetails> pojoGetAllCategoryDetails;
     AdapterGetAllCategoryDetails adapterGetAllCategoryDetails;
+    SearchView searchCategory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,11 +44,44 @@ public class HomeFragment extends Fragment {
         pojoGetAllCategoryDetails = new ArrayList<>();
         lvShowAllCategory=view.findViewById(R.id.lvFragmentHomeListview);
         tvNoCategoryAvilable=view.findViewById(R.id.tvFragmentHomeNoCategoryAvliable);
+        searchCategory=view.findViewById(R.id.svHomeFragmentSerchCategory);
+
+        searchCategory.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchCategory(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                searchCategory(query);
+                return false;
+            }
+        });
 
         getAllCategory();
 
         return view;
     }
+
+    private void searchCategory(String query) {
+        List<POJOGetAllCategoryDetails> tempCategory = new ArrayList<>();
+        tempCategory.clear();
+
+        for (POJOGetAllCategoryDetails obj:pojoGetAllCategoryDetails)
+        {
+            if (obj.getCategoryName().toUpperCase().contains(query.toUpperCase())){
+                tempCategory.add(obj);
+            }
+            else {
+                tvNoCategoryAvilable.setVisibility(View.VISIBLE);
+            }
+            adapterGetAllCategoryDetails = new AdapterGetAllCategoryDetails(tempCategory,getActivity());
+            lvShowAllCategory.setAdapter(adapterGetAllCategoryDetails);
+        }
+    }
+
     private void getAllCategory() {
         AsyncHttpClient client=new AsyncHttpClient();
         RequestParams params = new RequestParams();
