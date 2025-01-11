@@ -1,12 +1,15 @@
 package com.example.finalyearproject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.example.finalyearproject.Common.Urls;
@@ -49,6 +52,7 @@ public class AdapterGetAllCategoryDetails extends BaseAdapter {
             view =inflater.inflate(R.layout.lv_get_all_category,null);
             hoplder.ivCategoryImage = view.findViewById(R.id.ivgetAllCategoryImageCategory);
             hoplder.tvcategoryName = view.findViewById(R.id.tvgetAllCategoryTvCategoryName);
+            hoplder.cvCategoryList = view.findViewById(R.id.cvCategoryList);
 
             view.setTag(hoplder);
         }
@@ -66,10 +70,20 @@ public class AdapterGetAllCategoryDetails extends BaseAdapter {
                 .error(R.drawable.noimg)
                 .into(hoplder.ivCategoryImage);
 
+        hoplder.cvCategoryList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity,CategoryWiseEventActivity.class);
+                intent.putExtra("categoryname",obj.getCategoryName());
+                activity.startActivity(intent);
+            }
+        });
+
         return view;
     }
     class ViewHoplder
     {
+        CardView cvCategoryList;
         ImageView ivCategoryImage;
         TextView tvcategoryName;
     }

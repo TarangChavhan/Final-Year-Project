@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/cvCategoryList"
         app:cardBackgroundColor="@color/light_green"
         app:cardElevation="16sp"
         app:cardCornerRadius="16sp"
