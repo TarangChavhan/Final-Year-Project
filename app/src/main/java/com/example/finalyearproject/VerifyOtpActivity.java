@@ -124,17 +124,18 @@ public class VerifyOtpActivity extends AppCompatActivity {
                         new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             @Override
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                Toast.makeText(VerifyOtpActivity.this,"Verifycation Completed",Toast.LENGTH_LONG).show();
+                                Toast.makeText(VerifyOtpActivity.this,"verification Completed",Toast.LENGTH_LONG).show();
                             }
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerifyOtpActivity.this,"Verifycation Failed",Toast.LENGTH_LONG).show();
+                                Toast.makeText(VerifyOtpActivity.this,"verification Failed",Toast.LENGTH_LONG).show();
                             }
 
                             @Override
                             public void onCodeSent(@NonNull String VerificationCode, @NonNull
                             PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                Toast.makeText(VerifyOtpActivity.this, "verification code successfully Send", Toast.LENGTH_SHORT).show();
                                strVerificationCode = VerificationCode;
                             }
                         }

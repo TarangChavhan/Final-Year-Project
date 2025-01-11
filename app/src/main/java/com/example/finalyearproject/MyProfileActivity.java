@@ -158,7 +158,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
                                 Glide.with(MyProfileActivity.this)
-                                        .load("http://192.168.10.13:80/mobileapppAPI/images/"+strImage)
+                                        .load(Urls.getAllCategoryImages+strImage)
                                         .skipMemoryCache(true)
                                         .error(R.drawable.noimg)
                                         .into(ProfilePhoto);

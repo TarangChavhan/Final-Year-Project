@@ -6,4 +6,6 @@ public class Urls {
     public static String RegisterUserWebService = "http://192.168.10.13:80/mobileapppAPI/userregister.php";
     public static String UserForgetPasswordWebService = "http://192.168.10.13:80/mobileapppAPI/userForgetPassword.php";
     public static String myDetailsWebservice = "http://192.168.10.13:80/mobileapppAPI/myDetails.php";
+    public static String getAllCategoryImages ="http://192.168.10.13:80/mobileapppAPI/images/";
+    public static String getAllCategoryWiseEvents ="http://192.168.10.13:80/mobileapppAPI/categoryWiseEvent";
 }

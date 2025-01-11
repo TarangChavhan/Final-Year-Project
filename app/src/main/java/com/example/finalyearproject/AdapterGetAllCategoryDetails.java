@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.finalyearproject.Common.Urls;
 
 import java.util.List;
 
@@ -16,12 +17,10 @@ public class AdapterGetAllCategoryDetails extends BaseAdapter {
 
     List<POJOGetAllCategoryDetails> pojoGetAllCategoryDetailsList;
     Activity activity;
-
     public AdapterGetAllCategoryDetails(List<POJOGetAllCategoryDetails> list, Activity activity) {
         this.pojoGetAllCategoryDetailsList = list;
         this.activity = activity;
     }
-
     @Override
     public int getCount() {
         return pojoGetAllCategoryDetailsList.size();
@@ -62,7 +61,7 @@ public class AdapterGetAllCategoryDetails extends BaseAdapter {
 
 
         Glide.with(activity)
-                .load("http://192.168.10.13:80/mobileapppAPI/images/"+obj.categoryImage)
+                .load(Urls.getAllCategoryImages +obj.categoryImage)
                 .skipMemoryCache(true)
                 .error(R.drawable.noimg)
                 .into(hoplder.ivCategoryImage);
