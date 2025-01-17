@@ -41,7 +41,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
     TextView Name,Username,Email,Password,Address,PhoneNo,State,District,City;
     ImageView ProfilePhoto;
-    AppCompatButton singout;
+    AppCompatButton singout,EditProfilePhoto,UpdateProfileDetails;
 
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
@@ -72,12 +72,13 @@ public class MyProfileActivity extends AppCompatActivity {
         singout = findViewById(R.id.myprofilebtnsingout);
 
         ProfilePhoto = findViewById(R.id.MyProfilePhoto);
-
+        EditProfilePhoto = findViewById(R.id.MyProfileChangePhoto);
+        UpdateProfileDetails = findViewById(R.id.myprofilebtnUpdateProfilet);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(MyProfileActivity.this,googleSignInOptions);
-
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
         if(googleSignInAccount!=null)
         {
             String name= googleSignInAccount.getDisplayName();
@@ -162,6 +163,18 @@ public class MyProfileActivity extends AppCompatActivity {
                                         .skipMemoryCache(true)
                                         .error(R.drawable.noimg)
                                         .into(ProfilePhoto);
+                                UpdateProfileDetails.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(MyProfileActivity.this,UpdateMyProfileActivity.class);
+                                        intent.putExtra("name",strname);
+                                        intent.putExtra("phone_no",strphone_no);
+                                        intent.putExtra("emailid",stremailid);
+                                        intent.putExtra("username",strusername);
+
+                                        startActivity(intent);
+                                    }
+                                });
                             }
 
                         } catch (JSONException e) {

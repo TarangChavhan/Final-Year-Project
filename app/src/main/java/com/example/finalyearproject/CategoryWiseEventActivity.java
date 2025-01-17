@@ -22,6 +22,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cz.msebera.android.httpclient.Header;
 
 public class CategoryWiseEventActivity extends AppCompatActivity {
@@ -30,12 +33,15 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
     ListView lvCategoryWiseEvent;
     TextView tvNoEventAvailable;
     String strCategoryName;
+    List<POJOCategoryWiseEvent> pojoCategoryWiseEventList;
+    AdapterCategoryWiseEvent adapterCategoryWiseEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_category_wise_event);
+        pojoCategoryWiseEventList = new ArrayList<>();
 
         searchCategorywiseEvent = findViewById(R.id.svCategorywiseEventSearch);
         lvCategoryWiseEvent = findViewById(R.id.lvCategorywiseEventlist);
@@ -44,11 +50,42 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
 
         getCategoryWiseEventList();
 
+        searchCategorywiseEvent.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchCategoryNamewiseEvent(query);
+                return false;
+            }
 
-
-
+            @Override
+            public boolean onQueryTextChange(String query) {
+                searchCategoryNamewiseEvent(query);
+                return false;
+            }
+        });
     }
 
+    private void searchCategoryNamewiseEvent(String query) {
+        List<POJOCategoryWiseEvent> temlist= new ArrayList<>();
+        temlist.clear();
+        for(POJOCategoryWiseEvent obj:pojoCategoryWiseEventList)
+        {
+            if (obj.getCategoryname().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getCompanyname().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getBudget().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getCompanyaddress().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getEvenrating().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getEventoffer().toUpperCase().contains(query.toUpperCase())||
+            obj.getEventimage().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getCategoryname().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getEventdescription().toUpperCase().contains(query.toUpperCase()))
+            {
+                temlist.add(obj);
+            }
+            adapterCategoryWiseEvent = new AdapterCategoryWiseEvent(temlist,this);
+            lvCategoryWiseEvent.setAdapter(adapterCategoryWiseEvent);
+        }
+    }
     private void getCategoryWiseEventList() {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
@@ -68,6 +105,24 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
                                 lvCategoryWiseEvent.setVisibility(View.GONE);
                                 tvNoEventAvailable.setText(View.VISIBLE);
                             }
+                            for (int i=0;i<jsonArray.length();i++)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String strid= jsonObject.getString("id");
+                                String strcategoryname= jsonObject.getString("categoryname");
+                                String strcompanyname= jsonObject.getString("companyname");
+                                String streventImage= jsonObject.getString("eventimage");
+                                String strbudget= jsonObject.getString("budget");
+                                String streventRating= jsonObject.getString("evenrating");
+                                String streventOffer= jsonObject.getString("eventoffer");
+                                String streventDescription= jsonObject.getString("eventdescription");
+                                String strcompanyAddress= jsonObject.getString("companyaddress");
+
+                                pojoCategoryWiseEventList.add(new POJOCategoryWiseEvent(strid,strcategoryname,strcompanyname,streventImage,strbudget,streventRating,streventOffer,streventDescription,strcompanyAddress));
+
+                            }
+                            adapterCategoryWiseEvent = new AdapterCategoryWiseEvent(pojoCategoryWiseEventList,CategoryWiseEventActivity.this);
+                            lvCategoryWiseEvent.setAdapter(adapterCategoryWiseEvent);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }

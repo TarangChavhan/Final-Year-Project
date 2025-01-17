@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cvCategorywiseEvent"
+        app:cardBackgroundColor="@color/white"
+        android:layout_margin="8sp"
+        app:cardCornerRadius="16sp"
+        app:cardMaxElevation="16sp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:id="@+id/ivCategoryWiseEventImage"
+                    android:src="@drawable/categorywiseeventsample"
+                    android:scaleType="fitXY"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivCategoryWiseCompanyName"
+                    android:layout_weight="90"
+                    android:text="Company Name"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivCategoryWiseEventRating"
+                    android:layout_weight="10"
+                    android:text="4.4"
+                    android:layout_margin="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:background="#A5D6A7"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivCategoryWiseEventAddress"
+                    android:layout_weight="80"
+                    android:text="Address"
+                    android:textStyle="italic"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivCategoryWiseCompanyBudget"
+                    android:layout_weight="20"
+                    android:layout_gravity="center"
+                    android:text="80,000"
+                    android:layout_margin="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/Light_gray"
+                android:layout_margin="8sp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivCategoryWiseEventOffer"
+                    android:layout_weight="60"
+                    android:text="Event Offer"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivCategoryWiseCategoryName"
+                    android:layout_weight="40"
+                    android:text="Category Name"
+                    android:layout_margin="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivCategoryWiseEventDesscription"
+                android:text="Event Description"
+                android:textStyle="italic"
+                android:layout_margin="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
