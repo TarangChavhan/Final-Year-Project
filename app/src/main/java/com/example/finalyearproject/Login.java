@@ -24,6 +24,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalyearproject.Admin.AdminHomeActivity;
 import com.example.finalyearproject.Common.NetworkChangeListner;
 import com.example.finalyearproject.Common.Urls;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -218,15 +219,21 @@ public class Login extends AppCompatActivity {
                 progressDialog.dismiss();
                 try {
                     String status = response.getString("success");
-                    if(status.equals("1"))
+                    String struserrole = response.getString("UserRole");
+                    if(status.equals("1") && struserrole.equals("user"))
                     {
                         progressDialog.dismiss();
                         Intent intent= new Intent(Login.this,HomeActivity.class);
                         editor.putString("username",ETUserename.getText().toString()).commit();
                         startActivity(intent);
                         finish();
-                    }
-                    else
+                    } else if (status.equals("1") && struserrole.equals("admin")) {
+                        progressDialog.dismiss();
+                        Intent intent= new Intent(Login.this, AdminHomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                        
+                    } else
                     {
                         Toast.makeText(Login.this,"Invalid Username Or password",Toast.LENGTH_SHORT).show();
                     }

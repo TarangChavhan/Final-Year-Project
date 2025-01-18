@@ -41,7 +41,6 @@ public class SetUpNewPasswordActivity extends AppCompatActivity {
 
         strMobileNo = getIntent().getStringExtra("phone_no");
         Toast.makeText(SetUpNewPasswordActivity.this, strMobileNo, Toast.LENGTH_SHORT).show();
-
         BtnSetUpPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +92,6 @@ public class SetUpNewPasswordActivity extends AppCompatActivity {
                             throw new RuntimeException(e);
                         }
                     }
-
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         super.onFailure(statusCode, headers, throwable, errorResponse);

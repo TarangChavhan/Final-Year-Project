@@ -43,4 +43,5 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
     implementation ("com.google.android.gms:play-services-auth:21.3.0")
     implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.android.volley:volley:1.2.1")
 }

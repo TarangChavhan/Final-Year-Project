@@ -111,7 +111,7 @@ public class MyProfileActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCanceledOnTouchOutside(true);
         progressDialog.show();
-        
+
         getMydetails();
     }
 
