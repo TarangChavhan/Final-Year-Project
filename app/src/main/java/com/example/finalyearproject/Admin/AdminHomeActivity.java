@@ -1,13 +1,13 @@
 package com.example.finalyearproject.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,14 +15,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finalyearproject.Admin.AdapterClass.AdapterGetAllCategoryDetailsRV;
 import com.example.finalyearproject.Common.Urls;
 import com.example.finalyearproject.POJOGetAllCategoryDetails;
 import com.example.finalyearproject.R;
-import com.loopj.android.http.RequestParams;
+import com.example.finalyearproject.Admin.AdapterClass.ViewAllUserLocationMapActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +34,8 @@ public class AdminHomeActivity extends AppCompatActivity {
     RecyclerView rvrecyclerView;
     List<POJOGetAllCategoryDetails> pojoGetAllCategoryDetails;
     AdapterGetAllCategoryDetailsRV adapterGetAllCategoryDetailsRV;
+    CardView cvALlCoustomerLoactionMap,getCvALlCoustomerDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,9 @@ public class AdminHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
 
         rvrecyclerView = findViewById(R.id.rvadminHomeListview);
+        cvALlCoustomerLoactionMap = findViewById(R.id.cvAdminHomeCoustomerLocation);
+        getCvALlCoustomerDetails = findViewById(R.id.cvAdminHomeCoustomerDetails);
+
         rvrecyclerView.setLayoutManager(new GridLayoutManager(AdminHomeActivity.this,2,GridLayoutManager.HORIZONTAL,false));
 
 
@@ -51,6 +55,21 @@ public class AdminHomeActivity extends AppCompatActivity {
         rvrecyclerView.setAdapter(adapterGetAllCategoryDetailsRV);
 
         getAllCategoryRV();
+
+        cvALlCoustomerLoactionMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminHomeActivity.this, ViewAllUserLocationMapActivity.class);
+                startActivity(intent);
+            }
+        });
+        getCvALlCoustomerDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminHomeActivity.this, ViewAllCustomerActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

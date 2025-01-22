@@ -1,7 +1,12 @@
 package com.example.finalyearproject;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,12 +19,23 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.finalyearproject.Common.Urls;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -34,22 +50,41 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import cz.msebera.android.httpclient.Header;
 
 public class VerifyOtpActivity extends AppCompatActivity {
 
-    EditText Etcode1,Etcode2,Etcode3,Etcode4,Etcode5,Etcode6;
-    TextView TVnumber,TVresend;
+    EditText Etcode1, Etcode2, Etcode3, Etcode4, Etcode5, Etcode6;
+    TextView TVnumber, TVresend;
     ProgressDialog progressDialog;
     AppCompatButton verify;
-    private String strVerificationCode, strName, strMobileNo,strEmailId,strUsername,strPassWord,strCity,strDistrict,strstate,strAddress;
+    private String strVerificationCode, strName, strMobileNo, strEmailId, strUsername, strPassWord;
+    double latitude, longtitude;
+    String address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_verify_otp);
+
+        if (ActivityCompat.checkSelfPermission(VerifyOtpActivity.this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(VerifyOtpActivity.this,
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(VerifyOtpActivity.this,
+                    new String[]{
+                            android.Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                    }, 199);
+        } //else {
+            //getUseeLocation();
+        //}
+
 
         Etcode1 = findViewById(R.id.verifyotpno1);
         Etcode2 = findViewById(R.id.verifyotpno2);
@@ -63,13 +98,9 @@ public class VerifyOtpActivity extends AppCompatActivity {
         TVnumber = findViewById(R.id.verifyotpPhoneNumber);
         TVresend = findViewById(R.id.verifyotpResendotp);
 
-        strVerificationCode =getIntent().getStringExtra("verificationCode");
+        strVerificationCode = getIntent().getStringExtra("verificationCode");
         strName = getIntent().getStringExtra("Name");
-        strCity = getIntent().getStringExtra("city");
-        strDistrict = getIntent().getStringExtra("distric");
-        strstate = getIntent().getStringExtra("state");
         strMobileNo = getIntent().getStringExtra("phone_no");
-        strAddress = getIntent().getStringExtra("address");
         strEmailId = getIntent().getStringExtra("emailid");
         strPassWord = getIntent().getStringExtra("password");
         strUsername = getIntent().getStringExtra("username");
@@ -82,31 +113,28 @@ public class VerifyOtpActivity extends AppCompatActivity {
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if(Etcode1.getText().toString().trim().isEmpty() || Etcode2.getText().toString().trim().isEmpty() ||
-            Etcode3.getText().toString().trim().isEmpty() || Etcode4.getText().toString().trim().isEmpty() ||
-            Etcode5.getText().toString().trim().isEmpty()  || Etcode6.getText().toString().trim().isEmpty())
-                {
-                    Toast.makeText(VerifyOtpActivity.this,"Please Enter Valid Otp",Toast.LENGTH_SHORT).show();
+                if (Etcode1.getText().toString().trim().isEmpty() || Etcode2.getText().toString().trim().isEmpty() ||
+                        Etcode3.getText().toString().trim().isEmpty() || Etcode4.getText().toString().trim().isEmpty() ||
+                        Etcode5.getText().toString().trim().isEmpty() || Etcode6.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(VerifyOtpActivity.this, "Please Enter Valid Otp", Toast.LENGTH_SHORT).show();
                 }
-                String otpcode= Etcode1.getText().toString()+Etcode2.getText().toString()+Etcode3.getText().toString()+
-                        Etcode4.getText().toString()+Etcode5.getText().toString()+Etcode6.getText().toString();
-                if(strVerificationCode!=null)
-                {
+                String otpcode = Etcode1.getText().toString() + Etcode2.getText().toString() + Etcode3.getText().toString() +
+                        Etcode4.getText().toString() + Etcode5.getText().toString() + Etcode6.getText().toString();
+                if (strVerificationCode != null) {
                     progressDialog = new ProgressDialog(VerifyOtpActivity.this);
                     progressDialog.setTitle("Verifying OTP");
                     progressDialog.setMessage("Please wait");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
 
-                   PhoneAuthCredential phoneAuthCredential=PhoneAuthProvider.getCredential(
-                      strVerificationCode,otpcode);
+                    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(
+                            strVerificationCode, otpcode);
                     FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 progressDialog.dismiss();
-                                userRegisterDetails();
+                                getUseeLocation();
                             }
                         }
                     });
@@ -124,19 +152,19 @@ public class VerifyOtpActivity extends AppCompatActivity {
                         new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             @Override
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                Toast.makeText(VerifyOtpActivity.this,"verification Completed",Toast.LENGTH_LONG).show();
+                                Toast.makeText(VerifyOtpActivity.this, "verification Completed", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerifyOtpActivity.this,"verification Failed",Toast.LENGTH_LONG).show();
+                                Toast.makeText(VerifyOtpActivity.this, "verification Failed", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
                             public void onCodeSent(@NonNull String VerificationCode, @NonNull
                             PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 Toast.makeText(VerifyOtpActivity.this, "verification code successfully Send", Toast.LENGTH_SHORT).show();
-                               strVerificationCode = VerificationCode;
+                                strVerificationCode = VerificationCode;
                             }
                         }
                 );
@@ -146,8 +174,6 @@ public class VerifyOtpActivity extends AppCompatActivity {
         setupInputOtp();
 
 
-
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -155,7 +181,59 @@ public class VerifyOtpActivity extends AppCompatActivity {
         });
     }
 
-    private void userRegisterDetails() {
+    private void getUseeLocation() {
+        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(VerifyOtpActivity.this);
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY,
+                new CancellationToken() {
+                    @NonNull
+                    @Override
+                    public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean isCancellationRequested() {
+                        return false;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                latitude = location.getLatitude();
+                longtitude = location.getLongitude();
+
+                Geocoder geocoder = new Geocoder(VerifyOtpActivity.this);
+                try {
+                    List<Address> addressList = geocoder.getFromLocation(latitude, longtitude, 1);
+                    address = addressList.get(0).getAddressLine(0);
+
+                    userRegisterDetails(latitude,longtitude,address);
+
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(VerifyOtpActivity.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void userRegisterDetails(double latitude,double longtitude,String address) {
         AsyncHttpClient client = new AsyncHttpClient();  //client and server Communication
         RequestParams requestParams = new RequestParams();  //put data
 
@@ -163,12 +241,10 @@ public class VerifyOtpActivity extends AppCompatActivity {
         requestParams.put("username",strUsername);
         requestParams.put("emailid",strEmailId);
         requestParams.put("password",strPassWord);
-        requestParams.put("address",strAddress);
         requestParams.put("phone_no",strMobileNo);
-        requestParams.put("state",strstate);
-        requestParams.put("distric",strDistrict);
-        requestParams.put("city",strCity);
-
+        requestParams.put("latitude",latitude);
+        requestParams.put("longitude",longtitude);
+        requestParams.put("address",address);
         client.post(Urls.RegisterUserWebService,requestParams,
                 new JsonHttpResponseHandler()
                 {
@@ -176,7 +252,6 @@ public class VerifyOtpActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
                         progressDialog.dismiss();
-
                         try {
                             //below line was wrong, it shoud "String status = response.getString(("sucess")); "
                             String status = response.getString("success");

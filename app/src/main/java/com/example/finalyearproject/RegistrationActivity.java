@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 import cz.msebera.android.httpclient.Header;
 
 public class RegistrationActivity extends AppCompatActivity {
-    EditText RName,RUsername,REmaild,RPassword,RAddress,RPhone,RStatename,RDistrict,Rcity;
+    EditText RName,RUsername,REmaild,RPassword,RPhone;
     CheckBox Rshowpass;
     ProgressDialog progressDialog;
     androidx.appcompat.widget.AppCompatButton Rbutton;
@@ -51,11 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
         RUsername = findViewById(R.id.ETRegistrationUsername);
         REmaild = findViewById(R.id.ETRegistrationEmailID);
         RPassword = findViewById(R.id.ETRegistrationPassword);
-        RAddress = findViewById(R.id.ETRegistrationAddress);
         RPhone = findViewById(R.id.ETRegistrationPhone);
-        RStatename = findViewById(R.id.ETRegistrationState);
-        RDistrict = findViewById(R.id.ETRegistrationDistrict);
-        Rcity = findViewById(R.id.ETRegistrationCity);
         Rshowpass = findViewById(R.id.CBpassword);
         Rbutton = findViewById(R.id.BtnRegistration);
 
@@ -126,22 +122,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 {
                     RPhone.setError("10 digit number required ");
                 }
-                else if (RAddress.getText().toString().isEmpty())
-                {
-                    RAddress.setError("Address is required");
-                }
-                else if (RStatename.getText().toString().isEmpty())
-                {
-                    RStatename.setError("State Name is required");
-                }
-                else if (RDistrict.getText().toString().isEmpty())
-                {
-                    RDistrict.setError("District Name is required");
-                }
-                else if (Rcity.getText().toString().isEmpty())
-                {
-                    Rcity.setError("City Name is required");
-                }
                 else
                 {
                     progressDialog= new ProgressDialog(RegistrationActivity.this);
@@ -177,11 +157,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                    intent.putExtra("username",RUsername.getText().toString());
                                    intent.putExtra("password",RPassword.getText().toString());
                                    intent.putExtra("emailid",REmaild.getText().toString());
-                                   intent.putExtra("address",RAddress.getText().toString());
                                    intent.putExtra("phone_no",RPhone.getText().toString());
-                                   intent.putExtra("state",RStatename.getText().toString());
-                                   intent.putExtra("distric",RDistrict.getText().toString());
-                                   intent.putExtra("city",Rcity.getText().toString());
                                    startActivity(intent);
                                 }
                             }

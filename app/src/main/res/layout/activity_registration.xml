@@ -100,7 +100,7 @@
                     android:layout_margin="8sp"
                     android:background="@drawable/btshape"
                     android:fontFamily="casual"
-                    android:hint="Enter Password"
+                    android:hint="Create Password"
                     android:inputType="textPassword"
                     android:paddingLeft="16sp"
                     android:textColorHint="@color/black"
@@ -115,22 +115,6 @@
                     android:textStyle="bold"
                     android:id="@+id/CBpassword"
                     android:textSize="16sp"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ETRegistrationAddress"
-                    android:background="@drawable/btshape"
-                    android:inputType="textMultiLine"
-                    android:lines="6"
-                    android:hint="Address"
-                    android:gravity="top"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_margin="8sp"
-                    android:paddingLeft="16sp"
-                    android:fontFamily="casual"/>
                 <EditText
                     android:id="@+id/ETRegistrationPhone"
                     android:layout_width="match_parent"
@@ -144,48 +128,7 @@
                     android:textColorHint="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/ETRegistrationState"
-                    android:hint="State Name"
-                    android:textColorHint="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:inputType="text"
-                    android:layout_margin="8sp"
-                    android:background="@drawable/btshape"
-                    android:paddingLeft="16sp"
-                    android:fontFamily="casual"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/ETRegistrationDistrict"
-                    android:hint="District Name"
-                    android:textColorHint="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:inputType="text"
-                    android:layout_margin="8sp"
-                    android:background="@drawable/btshape"
-                    android:paddingLeft="16sp"
-                    android:fontFamily="casual"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/ETRegistrationCity"
-                    android:hint="City Name"
-                    android:textColorHint="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:inputType="text"
-                    android:layout_margin="8sp"
-                    android:background="@drawable/btshape"
-                    android:paddingLeft="16sp"
-                    android:fontFamily="casual"/>
-
-
-                <androidx.appcompat.widget.AppCompatButton
+                                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/BtnRegistration"

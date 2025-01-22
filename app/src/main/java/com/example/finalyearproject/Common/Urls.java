@@ -9,4 +9,11 @@ public class Urls {
     public static String getAllCategoryImages ="http://192.168.177.13:80/mobileapppAPI/images/";
     public static String getAllCategoryWiseEvents ="http://192.168.177.13:80/mobileapppAPI/categoryWiseEvent.php";
     public static String updateMyProfileWebService =webServiceAddress +"updateMyProfile.php";
+
+    //Admin Side
+    public static String getAllCustomerLocationWebService = webServiceAddress+"getAllCustomerLocation.php";
+    public  static String getAllCustomerrDeatailswebservice = webServiceAddress+"getAllCustomerDetails.php";
+
+    public static String deleteUserWebService = webServiceAddress+"deleteuser.php";
+
 }

@@ -48,6 +48,9 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         } else if (item.getItemId()==R.id.HomePageMenuMyProfile) {
             Intent intent= new Intent(HomeActivity.this,MyProfileActivity.class);
             startActivity(intent);
+        } else if (item.getItemId()==R.id.HomePageMenuScanner) {
+            Intent intent = new Intent(HomeActivity.this, QrCodeActivity.class);
+            startActivity(intent);
         }
         return true;
     }

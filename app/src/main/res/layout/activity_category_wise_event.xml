@@ -15,6 +15,7 @@
         app:queryHint="Search by Category,Company,Event,Address"
         app:iconifiedByDefault="false"
         android:layout_margin="16sp"
+        android:layout_marginTop="16dp"
         android:padding="8sp"/>
     <ListView
         android:layout_width="match_parent"

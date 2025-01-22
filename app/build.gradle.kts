@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -27,6 +28,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -36,6 +40,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -44,4 +49,7 @@ dependencies {
     implementation ("com.google.android.gms:play-services-auth:21.3.0")
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     implementation ("com.android.volley:volley:1.2.1")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.google.zxing.core:3.2.1")
 }

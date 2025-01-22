@@ -47,6 +47,7 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
         lvCategoryWiseEvent = findViewById(R.id.lvCategorywiseEventlist);
         tvNoEventAvailable = findViewById(R.id.tvCateWiseEventNoEventAvilable);
         strCategoryName = getIntent().getStringExtra("categoryname");
+        setTitle("Events");
 
         getCategoryWiseEventList();
 
