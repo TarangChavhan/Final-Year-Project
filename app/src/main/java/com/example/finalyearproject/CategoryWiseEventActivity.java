@@ -1,5 +1,7 @@
 package com.example.finalyearproject;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -32,7 +35,7 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
     SearchView searchCategorywiseEvent;
     ListView lvCategoryWiseEvent;
     TextView tvNoEventAvailable;
-    String strCategoryName;
+    String strCategoryName,strMobileNo;
     List<POJOCategoryWiseEvent> pojoCategoryWiseEventList;
     AdapterCategoryWiseEvent adapterCategoryWiseEvent;
 
@@ -47,6 +50,8 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
         lvCategoryWiseEvent = findViewById(R.id.lvCategorywiseEventlist);
         tvNoEventAvailable = findViewById(R.id.tvCateWiseEventNoEventAvilable);
         strCategoryName = getIntent().getStringExtra("categoryname");
+        strMobileNo = getIntent().getStringExtra("mobile_no");
+
         setTitle("Events");
 
         getCategoryWiseEventList();
@@ -79,7 +84,8 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
             obj.getEventoffer().toUpperCase().contains(query.toUpperCase())||
             obj.getEventimage().toUpperCase().contains(query.toUpperCase()) ||
             obj.getCategoryname().toUpperCase().contains(query.toUpperCase()) ||
-            obj.getEventdescription().toUpperCase().contains(query.toUpperCase()))
+            obj.getEventdescription().toUpperCase().contains(query.toUpperCase()) ||
+            obj.getMobileNo().toUpperCase().contains(query.toUpperCase()))
             {
                 temlist.add(obj);
             }
@@ -118,8 +124,9 @@ public class CategoryWiseEventActivity extends AppCompatActivity {
                                 String streventOffer= jsonObject.getString("eventoffer");
                                 String streventDescription= jsonObject.getString("eventdescription");
                                 String strcompanyAddress= jsonObject.getString("companyaddress");
+                                String strMobileNo=jsonObject.getString("mobile_no");
 
-                                pojoCategoryWiseEventList.add(new POJOCategoryWiseEvent(strid,strcategoryname,strcompanyname,streventImage,strbudget,streventRating,streventOffer,streventDescription,strcompanyAddress));
+                                pojoCategoryWiseEventList.add(new POJOCategoryWiseEvent(strid,strcategoryname,strcompanyname,streventImage,strbudget,streventRating,streventOffer,streventDescription,strcompanyAddress,strMobileNo));
 
                             }
                             adapterCategoryWiseEvent = new AdapterCategoryWiseEvent(pojoCategoryWiseEventList,CategoryWiseEventActivity.this);

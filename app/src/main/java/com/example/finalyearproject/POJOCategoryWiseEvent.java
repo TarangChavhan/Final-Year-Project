@@ -1,9 +1,9 @@
 package com.example.finalyearproject;
 
 public class POJOCategoryWiseEvent {
-    String id,categoryname,companyname,eventimage,budget,evenrating,eventoffer,eventdescription,companyaddress;
+    String id, categoryname, companyname, eventimage, budget, evenrating, eventoffer, eventdescription, companyaddress,MobileNo;
 
-    public POJOCategoryWiseEvent(String id, String categoryname, String companyname, String eventimage, String budget, String evenrating, String eventoffer, String eventdescription, String companyaddress) {
+    public POJOCategoryWiseEvent(String id, String categoryname, String companyname, String eventimage, String budget, String evenrating, String eventoffer, String eventdescription, String companyaddress, String mobileNo) {
         this.id = id;
         this.categoryname = categoryname;
         this.companyname = companyname;
@@ -13,6 +13,7 @@ public class POJOCategoryWiseEvent {
         this.eventoffer = eventoffer;
         this.eventdescription = eventdescription;
         this.companyaddress = companyaddress;
+        MobileNo = mobileNo;
     }
 
     public String getId() {
@@ -85,5 +86,13 @@ public class POJOCategoryWiseEvent {
 
     public void setCompanyaddress(String companyaddress) {
         this.companyaddress = companyaddress;
+    }
+
+    public String getMobileNo() {
+        return MobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        MobileNo = mobileNo;
     }
 }

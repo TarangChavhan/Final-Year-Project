@@ -1,12 +1,18 @@
 package com.example.finalyearproject;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
@@ -58,7 +64,12 @@ public class AdapterCategoryWiseEvent extends BaseAdapter {
             holder.tvCategorywiseeventOffer = view.findViewById(R.id.ivCategoryWiseEventOffer);
             holder.tvCategorywiseEventDescription = view.findViewById(R.id.ivCategoryWiseEventDesscription);
             holder.TvCategorywiseCategoryName = view.findViewById(R.id.ivCategoryWiseCategoryName);
+            holder.TvMobileNo = view.findViewById(R.id.ivCategoryWiseEventMobileNo);
+
+            holder.openwhatsappcv = view.findViewById(R.id.cvCategorywiseEvent);
             view.setTag(holder);
+
+
         }
         else
         {
@@ -72,6 +83,7 @@ public class AdapterCategoryWiseEvent extends BaseAdapter {
         holder.tvCategorywiseeventOffer.setText(obj.eventoffer);
         holder.tvCategorywiseEventDescription.setText(obj.eventdescription);
         holder.TvCategorywiseCategoryName.setText(obj.categoryname);
+        holder.TvMobileNo.setText(obj.MobileNo);
 
         Glide.with(activity)
                 .load(Urls.getAllCategoryImages +obj.eventimage)
@@ -79,15 +91,35 @@ public class AdapterCategoryWiseEvent extends BaseAdapter {
                 .error(R.drawable.noimg)
                 .into(holder.ivCategoryWiseImage);
 
-
+        holder.openwhatsappcv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                    sendIntent.putExtra("mobile_no",obj.getMobileNo());
+                    String phoneNumber = obj.getMobileNo(); // Replace with the phone number without the + sign or leading zeros, but with country code
+                    sendIntent.setData(Uri.parse("smsto:" +phoneNumber));
+                    sendIntent.setPackage("com.whatsapp");
+                    activity.startActivity(sendIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(activity, "WhatsApp not installed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return view;
     }
-    class Viewholder
-    {
-        ImageView ivCategoryWiseImage;
-        TextView tvCategorywiseCompanyName,tvCategorywiseRating,tvCategorywiseCompanyAddress,tvCategorywiseBudget,tvCategorywiseeventOffer,tvCategorywiseEventDescription,TvCategorywiseCategoryName;
+
+    private void openWhatsApp(View view) {
 
     }
-
 }
+
+    class Viewholder
+    {
+        CardView openwhatsappcv;
+        ImageView ivCategoryWiseImage;
+        TextView tvCategorywiseCompanyName,tvCategorywiseRating,tvCategorywiseCompanyAddress,tvCategorywiseBudget,tvCategorywiseeventOffer,tvCategorywiseEventDescription,TvCategorywiseCategoryName,TvMobileNo;
+
+    }

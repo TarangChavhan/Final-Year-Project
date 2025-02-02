@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.finalyearproject"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.finalyearproject"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -51,5 +51,5 @@ dependencies {
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.android.gms:play-services-maps:19.0.0")
-    implementation("com.google.zxing.core:3.2.1")
+    implementation ("androidx.activity:activity:1.9.0")
 }
