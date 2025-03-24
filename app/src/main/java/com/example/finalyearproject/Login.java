@@ -232,7 +232,6 @@ public class Login extends AppCompatActivity {
                         Intent intent= new Intent(Login.this, AdminHomeActivity.class);
                         startActivity(intent);
                         finish();
-                        
                     } else
                     {
                         Toast.makeText(Login.this,"Invalid Username Or password",Toast.LENGTH_SHORT).show();

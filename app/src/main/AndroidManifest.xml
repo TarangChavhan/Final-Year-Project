@@ -19,6 +19,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            />
+        <activity
             android:name=".BookOrderActivity"
             android:exported="false" />
         <activity
@@ -70,10 +74,6 @@
         <activity
             android:name=".VerifyOtpActivity"
             android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false"
-            android:theme="@style/ShowActionBar" />
         <activity
             android:name=".RegistrationActivity"
             android:exported="false" />

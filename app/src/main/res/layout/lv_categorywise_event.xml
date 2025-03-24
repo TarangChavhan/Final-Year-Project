@@ -118,7 +118,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="60"
+                android:layout_weight="65"
                 android:id="@+id/ivCategoryWiseEventDesscription"
                 android:text="Event Description"
                 android:textStyle="italic"
@@ -128,7 +128,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="35"
                 android:id="@+id/ivCategoryWiseEventMobileNo"
                 android:text="12345678900"
                 android:gravity="right"
@@ -136,8 +136,6 @@
                 android:layout_margin="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
-
         </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

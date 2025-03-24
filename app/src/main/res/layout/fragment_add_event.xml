@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    tools:context=".Fragments.AddEventFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/categorywiseeventsample"
+        android:id="@+id/AddEventCompanyPhoto"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyName"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Name"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyRating"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Rating"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyAddress"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Address"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyBudgetOfEvent"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Maximum Budget"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyOffer"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Offer Of Event"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyCategoryName"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Category (Eg. Birthday etc...)"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyDescription"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Description"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_bg_shape"
+        android:id="@+id/AddEventCompanyContactNumber"
+        android:paddingLeft="16dp"
+        android:hint="Enter Company Number"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post Company Details"
+        android:background="@drawable/btshape"/>
+
+
+</LinearLayout>
