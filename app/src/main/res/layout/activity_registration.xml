@@ -15,7 +15,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="300dp"
             android:layout_height="250dp"
-            android:src="@drawable/mainlogo"
+            android:src="@drawable/logo"
             android:padding="18dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"/>

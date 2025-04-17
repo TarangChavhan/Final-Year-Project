@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="250dp"
-        android:src="@drawable/mainlogo"
+        android:src="@drawable/logo"
         android:padding="16dp"/>
 
     <androidx.cardview.widget.CardView

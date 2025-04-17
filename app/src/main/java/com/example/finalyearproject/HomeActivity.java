@@ -64,9 +64,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         } else if (item.getItemId()==R.id.BottomNavigationMenuMyProfile) {
             getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout,myProfileFragment).commit();
         }
-        else if (item.getItemId()==R.id.BottomNavigationMenuTask) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout, addEventFragment).commit();
-        }
 
         return true;
     }
